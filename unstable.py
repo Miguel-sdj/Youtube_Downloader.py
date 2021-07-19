@@ -20,9 +20,9 @@ def animate():
         time.sleep(0.1)
     sys.stdout.write('\rTerminei, Baitola!')
     if is_movie == True:
-        print("\nSeu vídeo se encontra no diretório: Documents\Scripts\youtube_downloader\Youtube_Downloader\Vídeos")
+        print("\nSeu vídeo se encontra no diretório: {}\Youtube_Downloader\Vídeos".format(os.getcwd()))
     else:
-        print("\nSua música se encontra no diretório: Documents\Scripts\youtube_downloader\Youtube_Downloader\Músicas")
+        print("\nSua música se encontra no diretório: {}\Youtube_Downloader\Músicas".format(os.getcwd()))
     print('*'*100)
     time.sleep(20)
 
@@ -69,7 +69,7 @@ try:
                 os.rename(musica, new_file)
             except():
                 print("Ocorreu um erro inesperado. ")
-        print("Concluído")
+        print("Concluído, sua musica se encontra: {}\Youtube_Downloader\Músicas\Links".format(os.getcwd()))
         print('*'*100)
         time.sleep(10)
 except():
