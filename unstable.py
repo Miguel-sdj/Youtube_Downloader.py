@@ -70,6 +70,7 @@ try:
             except():
                 print("Ocorreu um erro inesperado. ")
         print("Concluído, sua musica se encontra: {}\Youtube_Downloader\Músicas\Links".format(os.getcwd()))
+        print("\nObrigado por usar!")
         print('*'*100)
         time.sleep(10)
 except():
