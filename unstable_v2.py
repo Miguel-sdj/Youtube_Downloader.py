@@ -35,11 +35,14 @@ class TelaPython:
             link_is_valid = False
 
         if link_is_valid == True:
+            start_time = time.time()
             musica = YouTube(link_youtube).streams.filter(only_audio=True).first().download('Youtube_Downloader/Músicas')
             base, ext = os.path.splitext(musica)
             new_file = base + '.mp3'
             os.rename(musica, new_file)
             print("\nSua música se encontra no diretório: {}\Youtube_Downloader\Músicas".format(os.getcwd()))
+            seconds = time.time() - start_time
+            print('Tempo total:', time.strftime("%H:%M:%S",time.gmtime(seconds)))
             time.sleep(10)
 
 tela = TelaPython()
