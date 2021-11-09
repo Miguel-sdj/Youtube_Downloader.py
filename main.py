@@ -18,7 +18,7 @@ def animate():
         sys.stdout.write('\rCarregando ' + c)
         sys.stdout.flush()
         time.sleep(0.1)
-    sys.stdout.write('\rTerminei, Baitola!')
+    sys.stdout.write('\rTerminei, Obrigado por usar!')
     if is_movie == True:
         print("\nSeu vídeo se encontra no diretório: Documents\Scripts\youtube_downloader\Youtube_Downloader\Vídeos")
     else:
