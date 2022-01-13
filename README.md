@@ -1,6 +1,6 @@
 # Youtube_Downloader.py
 
-Youtube_downloader.py is a tool that allows you to download videos or music more directly, quickly, open source and without advertisements
+Youtube_downloader.py is a tool that allows you to download videos or music more directly, quickly, open source and without advertisements made in python 3
 
 ## Installation
 
