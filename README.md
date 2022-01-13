@@ -24,12 +24,12 @@ cd Youtube_Downloader.py
 Now just run 
 
 ```python
-python3 main.py
+python main.py
 ```
 or just
 
 ```python
-python main.py
+python3 main.py
 ```
 
 
