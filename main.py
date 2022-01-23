@@ -1,4 +1,5 @@
 from pytube import YouTube
+from termcolor import colored
 import sys
 import itertools
 import threading
@@ -29,11 +30,12 @@ def animate():
         sys.stdout.write('\rLoading ' + c)
         sys.stdout.flush()
         time.sleep(0.1)
-    sys.stdout.write('\rDownload Completed!')
+    print(colored('\nDownload Completed!', 'green'))
+    
     if is_movie == True:
-        print("\nYour video is in the directory: {}\Youtube_Downloader\Video".format(os.getcwd()))
+        print("Your video is in the directory: {}\Youtube_Downloader\Video".format(os.getcwd()))
     else:
-        print("\nYour music is in the directory: {}\Youtube_Downloader\Music".format(os.getcwd()))
+        print("Your music is in the directory: {}\Youtube_Downloader\Music".format(os.getcwd()))
     print('*'*100)
     time.sleep(20)
 
@@ -58,7 +60,7 @@ while link_is_valid == False:
         link_is_valid = True
 
     else:
-        print("Invalid Link!")
+        print(colored('Invalid Link!', 'red'))
         link_is_valid = False
         is_link = False
 
@@ -72,7 +74,7 @@ if link_is_valid:
             print(f'Number of views: {video.views}\n')
 
     except:
-        print("Video unavailable!")
+        print(colored('Video unavailable!', 'red'))
         video_error = True
 
     if is_link == False:
@@ -81,16 +83,23 @@ if link_is_valid:
             is_movie = True
             video = video.streams.get_highest_resolution()
             print('For the video to have sound and image, it is necessary to download the resolution: {}'.format(video.resolution))
-            video.download('Youtube_Downloader/Vídeos')
+            video.download('Youtube_Downloader\Video')
             t.start()
 
         elif escolha == 2:
             is_movie = False
             t.start()
-            musica = YouTube(link_video).streams.filter(only_audio=True).first().download('Youtube_Downloader/Music')
+
+            musica = YouTube(link_video).streams.filter(only_audio=True).first().download('Youtube_Downloader\Music')
             base, ext = os.path.splitext(musica)
             new_file = base + '.mp3'
-            os.rename(musica, new_file)
+
+            if not os.path.exists(new_file):
+                os.rename(musica, new_file)
+            else:
+                print(colored('\nThis file already exists.', 'red'))
+                os.remove(musica)
+                os._exit(0)
 
         else:
             print("choose a valid number")
@@ -100,15 +109,23 @@ if link_is_valid:
             nome = YouTube(links_separados[i])
             print("Starting music download {}/{}: {}".format(i+1, len(links_separados), nome.title))
             try:
-                musica = YouTube(links_separados[i]).streams.filter(only_audio=True).first().download('Youtube_Downloader/Music/Links')
+                musica = YouTube(links_separados[i]).streams.filter(only_audio=True).first().download('Youtube_Downloader\Music\Links')
                 base, ext = os.path.splitext(musica)
                 new_file = base + '.mp3'
-                os.rename(musica, new_file)
+
+                if not os.path.exists(new_file):
+                    os.rename(musica, new_file)
+                else:
+                    print(colored('This file already exists. trying the next', 'red'))
+                    os.remove(musica)
+                    
             except():
                 print("An unexpected error has occurred.")
             
-        print("Completed, your music is: {}\Youtube_Downloader\Music\Links".format(os.getcwd()))
-        print("Thanks for using!")
+        
+        print(colored('Completed,', 'green'),end = ' ')
+        print("your music is: {}\Youtube_Downloader\Music\Links".format(os.getcwd()))
+        print(colored('Thanks for using!', 'green'))
         print('*'*100)
         time.sleep(10)
 
