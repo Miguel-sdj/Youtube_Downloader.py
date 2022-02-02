@@ -1,5 +1,4 @@
 from pytube import YouTube
-from termcolor import colored
 import sys
 import itertools
 import threading
@@ -30,12 +29,12 @@ def animate():
         sys.stdout.write('\rLoading ' + c)
         sys.stdout.flush()
         time.sleep(0.1)
-    print(colored('\nDownload Completed!', 'green'))
+    sys.stdout.write('\rDownload Completed!')
     
     if is_movie == True:
-        print("Your video is in the directory: {}\Youtube_Downloader\Video".format(os.getcwd()))
+        print("\nYour video is in the directory: {}\Youtube_Downloader\Video".format(os.getcwd()))
     else:
-        print("Your music is in the directory: {}\Youtube_Downloader\Music".format(os.getcwd()))
+        print("\nYour music is in the directory: {}\Youtube_Downloader\Music".format(os.getcwd()))
     print('*'*100)
     time.sleep(20)
 
@@ -60,7 +59,7 @@ while link_is_valid == False:
         link_is_valid = True
 
     else:
-        print(colored('Invalid Link!', 'red'))
+        print("Invalid Link!")
         link_is_valid = False
         is_link = False
 
@@ -74,7 +73,7 @@ if link_is_valid:
             print(f'Number of views: {video.views}\n')
 
     except:
-        print(colored('Video unavailable!', 'red'))
+        print("Video unavailable!")
         video_error = True
 
     if is_link == False:
@@ -97,7 +96,7 @@ if link_is_valid:
             if not os.path.exists(new_file):
                 os.rename(musica, new_file)
             else:
-                print(colored('\nThis file already exists.', 'red'))
+                print("This file already exists.")
                 os.remove(musica)
                 os._exit(0)
 
@@ -116,16 +115,15 @@ if link_is_valid:
                 if not os.path.exists(new_file):
                     os.rename(musica, new_file)
                 else:
-                    print(colored('This file already exists. trying the next', 'red'))
+                    print('This file already exists. trying the next')
                     os.remove(musica)
                     
             except():
                 print("An unexpected error has occurred.")
             
         
-        print(colored('Completed,', 'green'),end = ' ')
-        print("your music is: {}\Youtube_Downloader\Music\Links".format(os.getcwd()))
-        print(colored('Thanks for using!', 'green'))
+        print("Completed, your music is: {}\Youtube_Downloader\Music\Links".format(os.getcwd()))
+        print("Thanks for using!")
         print('*'*100)
         time.sleep(10)
 
