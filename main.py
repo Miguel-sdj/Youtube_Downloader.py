@@ -82,8 +82,9 @@ if link_is_valid:
             is_movie = True
             video = video.streams.get_highest_resolution()
             print('For the video to have sound and image, it is necessary to download the resolution: {}'.format(video.resolution))
-            video.download('Youtube_Downloader\Video')
             t.start()
+            video.download('Youtube_Downloader\Video')
+            
 
         elif escolha == 2:
             is_movie = False
