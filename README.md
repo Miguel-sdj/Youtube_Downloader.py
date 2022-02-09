@@ -18,8 +18,6 @@ Then clone the project and walk to your directory
 git clone https://github.com/Miguel-sdj/Youtube_Downloader.py
 ```
 
-Then
-
 ```bash
 cd Youtube_Downloader.py
 ```
