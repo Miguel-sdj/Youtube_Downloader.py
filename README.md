@@ -4,9 +4,9 @@ Youtube_downloader.py is a tool that allows you to download videos or music more
 
 ## Installation
 
-**Use the executable made available in the repository releases!**
+**If you are on windows it is recommended that you use the executable available in the releases tab**
 
-ou
+or
 
 First install the library (make sure you have python3 installed)
 ```bash
