@@ -10,7 +10,7 @@ ou
 
 First install the library (make sure you have python3 installed)
 ```bash
-pip install pytube
+pip install git+https://github.com/rmerzouki/pytube
 ```
 Then clone the project and walk to your directory
 
