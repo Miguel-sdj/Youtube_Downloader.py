@@ -1,4 +1,5 @@
 from pytube import YouTube
+from pytube.cli import on_progress 
 import sys
 import itertools
 import threading
@@ -67,7 +68,8 @@ if link_is_valid:
     try:
         video_error = False
         if is_link == False:
-            video = YouTube(link_video)
+            # video = YouTube(link_video)
+            video=YouTube(link_video,on_progress_callback=on_progress)
             print(f'Video Title: {video.title}')
             print(f'Duration: {video.length / 60:.2f} minutes')
             print(f'Number of views: {video.views}\n')
@@ -82,15 +84,17 @@ if link_is_valid:
             is_movie = True
             video = video.streams.get_highest_resolution()
             print('For the video to have sound and image, it is necessary to download the resolution: {}'.format(video.resolution))
+            # yt=YouTube(link_video,on_progress_callback=on_progress)
             t.start()
             video.download('Youtube_Downloader\Video')
+            
             
 
         elif escolha == 2:
             is_movie = False
             t.start()
 
-            musica = YouTube(link_video).streams.filter(only_audio=True).first().download('Youtube_Downloader\Music')
+            musica = YouTube(link_video,on_progress_callback=on_progress).streams.filter(only_audio=True).first().download('Youtube_Downloader\Music')
             base, ext = os.path.splitext(musica)
             new_file = base + '.mp3'
 
