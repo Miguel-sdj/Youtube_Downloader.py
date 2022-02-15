@@ -15,11 +15,7 @@ pip install git+https://github.com/rmerzouki/pytube
 Then clone the project and walk to your directory
 
 ```bash
-git clone https://github.com/Miguel-sdj/Youtube_Downloader.py
-```
-
-```bash
-cd Youtube_Downloader.py
+git clone https://github.com/Miguel-sdj/Youtube_Downloader.py && cd Youtube_Downloader.py
 ```
 
 Now just run 
