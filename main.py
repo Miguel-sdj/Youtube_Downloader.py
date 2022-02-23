@@ -46,7 +46,6 @@ while(loop):
                 try:
                         video_error = False
                         if is_link == False:
-                                # video = YouTube(link_video)
                                 video=YouTube(link_video,on_progress_callback=on_progress)
                                 print(f'Video Title: {video.title}')
                                 print(f'Duration: {video.length / 60:.2f} minutes')
@@ -63,7 +62,6 @@ while(loop):
                                 is_movie = True
                                 video = video.streams.get_highest_resolution()
                                 print('For the video to have sound and image, it is necessary to download the resolution: {}'.format(video.resolution))
-                                # yt=YouTube(link_video,on_progress_callback=on_progress)
                                 video.download('Youtube_Downloader\Video')
                                 print("(:")
                                 print('*'*100) 
@@ -82,7 +80,6 @@ while(loop):
                                 else:
                                         print("This file already exists.")
                                         os.remove(musica)
-                                        os._exit(0)
                         else:
                                 print("choose a valid number")
                 else:
