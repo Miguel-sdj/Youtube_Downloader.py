@@ -3,63 +3,63 @@ from pytube.cli import on_progress
 import time
 import os
 
-is_movie = None
-is_link = None
+isMovie = None
+isLink = None
 loop = True
 
-def separate_phrase(name_file):
-    file = open(name_file, "r", encoding='utf-8')
-    lines_phrase = file.readlines()
-    list_phrases = []
-    for lines in lines_phrase:
+def separatePhrase(nameFile):
+    file = open(nameFile, "r", encoding='utf-8')
+    linesPhrase = file.readlines()
+    listPhrases = []
+    for lines in linesPhrase:
         lines = lines.rstrip('\n')
         if not (lines.isnumeric()) and lines:
-            list_phrases.append(lines)
+            listPhrases.append(lines)
     file.close()
-    return list_phrases
+    return listPhrases
 
 print('*'*100)  
 
 while(loop):
-        link_is_valid = False
-        while link_is_valid == False:
-                link_video = input("Enter the video or song link: ")
-                link_video = str(link_video)
-                if link_video[:24] == "https://www.youtube.com/":
-                        link_is_valid = True
-                        is_link = False
+        linkIsValid = False
+        while linkIsValid == False:
+                linkVideo = input("Enter the video or song link: ")
+                linkVideo = str(linkVideo)
+                if linkVideo[:24] == "https://www.youtube.com/":
+                        linkIsValid = True
+                        isLink = False
 
-                elif link_video[:17] == "https://youtu.be/":
-                        link_is_valid = True
-                        is_link = False
+                elif linkVideo[:17] == "https://youtu.be/":
+                        linkIsValid = True
+                        isLink = False
 
-                elif link_video == "link":
-                        links_separados = separate_phrase('link.txt')
-                        is_link = True
-                        link_is_valid = True
+                elif linkVideo == "link":
+                        linkSeparados = separatePhrase('link.txt')
+                        isLink = True
+                        linkIsValid = True
 
                 else:
                         print("Invalid Link!")
-                        link_is_valid = False
-                        is_link = False
-        if link_is_valid:
+                        linkIsValid = False
+                        isLink = False
+        if linkIsValid:
                 try:
-                        video_error = False
-                        if is_link == False:
-                                video=YouTube(link_video,on_progress_callback=on_progress)
+                        isVideoError = False
+                        if isLink == False:
+                                video = YouTube(linkVideo,on_progress_callback = on_progress)
                                 print(f'Video Title: {video.title}')
                                 print(f'Duration: {video.length / 60:.2f} minutes')
                                 print(f'Number of views: {video.views}\n')
 
                 except:
                         print("Video unavailable!")
-                        video_error = True
+                        isVideoError = True
 
 
-                if is_link == False:
+                if isLink == False:
                         escolha = int(input("1 - to download as video\n2 - to download as song\nChoose: "))
                         if escolha == 1:
-                                is_movie = True
+                                isMovie = True
                                 video = video.streams.get_highest_resolution()
                                 print('For the video to have sound and image, it is necessary to download the resolution: {}'.format(video.resolution))
                                 video.download('Youtube_Downloader\Video')
@@ -67,32 +67,31 @@ while(loop):
                                 print('*'*100) 
 
                         elif escolha == 2:
-                                is_movie = False
-
-                                musica = YouTube(link_video,on_progress_callback=on_progress).streams.filter(only_audio=True).first().download('Youtube_Downloader\Music')
+                                isMovie = False
+                                musica = YouTube(linkVideo,on_progress_callback=on_progress).streams.filter(only_audio=True).first().download('Youtube_Downloader\Music')
                                 print("(:")
                                 print('*'*100) 
                                 base, ext = os.path.splitext(musica)
-                                new_file = base + '.mp3'
+                                newFile = base + '.mp3'
 
-                                if not os.path.exists(new_file):
-                                        os.rename(musica, new_file)
+                                if not os.path.exists(newFile):
+                                        os.rename(musica, newFile)
                                 else:
                                         print("This file already exists.")
                                         os.remove(musica)
                         else:
                                 print("choose a valid number")
                 else:
-                        for i in range(len(links_separados)):
-                                nome = YouTube(links_separados[i])
-                                print("Starting music download {}/{}: {}".format(i+1, len(links_separados), nome.title))
+                        for i in range(len(linkSeparados)):
+                                nome = YouTube(linkSeparados[i])
+                                print("Starting music download {}/{}: {}".format(i+1, len(linkSeparados), nome.title))
                                 try:
-                                        musica = YouTube(links_separados[i]).streams.filter(only_audio=True).first().download('Youtube_Downloader\Music\Links')
+                                        musica = YouTube(linkSeparados[i]).streams.filter(only_audio=True).first().download('Youtube_Downloader\Music\Links')
                                         base, ext = os.path.splitext(musica)
-                                        new_file = base + '.mp3'
+                                        newFile = base + '.mp3'
 
-                                        if not os.path.exists(new_file):
-                                                os.rename(musica, new_file)
+                                        if not os.path.exists(newFile):
+                                                os.rename(musica, newFile)
                                         else:
                                                 print('This file already exists. trying the next')
                                                 os.remove(musica)
